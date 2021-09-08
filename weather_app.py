@@ -55,12 +55,6 @@ window.title("My Weather App")
 i = Text(window, height=1, width=30)
 i.pack()
 
-label = Label(window, text="")
-label.pack()
-
-label2 = Label(window, text="")
-label2.pack()
-
 create_api_file()
 
 c = ConfigParser()
