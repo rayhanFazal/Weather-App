@@ -13,7 +13,7 @@ def search_loc() -> None:
     # Check if there is any info for the location
     if len(w_info) > 0:
         loc_label["text"] = "{} {}".format(w_info[0], w_info[1])
-        temp_label["text"] = str(w_info[2])
+        temp_label["text"] = str(w_info[2]) + u"\N{DEGREE SIGN}" + "C"
         weather_label["text"] = w_info[3]
     else:
         print("Cannot find location: " + loc)
