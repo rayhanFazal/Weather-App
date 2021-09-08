@@ -5,6 +5,10 @@ from tkinter import *
 from configparser import ConfigParser
 import requests
 
+# To get an API, go to https://openweathermap.org/, make an account, and then
+# generate your own API, taking note of the API name and key. You can get the
+# API from "Current Weather Data" APIs
+
 def search_loc() -> None:
     """Search for the location entered by the user and output its weather info
     otherwise print an error."""
