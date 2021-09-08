@@ -23,13 +23,15 @@ def get_weather_info(location: str) -> tuple:
     """Return a tuple containing the city, country, temperature, and weather
     of <location>"""
     info = requests.get(url.format(location, api))
-    j = info.json()
-    # retrieve necessary info from json file <j>
-    city = j["name"]
-    country = j["sys"]
-    temp = j["main"]["temp"] - 273.15 # convert kelvin to celsius
-    w = j["weather"][0]["main"]
-    return (city, country, temp, w)
+    if info:
+        j = info.json()
+        # retrieve necessary info from json file <j>
+        city = j["name"]
+        country = j["sys"]
+        temp = j["main"]["temp"] - 273.15 # convert kelvin to celsius
+        w = j["weather"][0]["main"]
+        return (city, country, temp, w)
+    print("Unable to retrieve info for location " + location)
 
 
 window = Tk()
