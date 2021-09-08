@@ -5,14 +5,10 @@ from tkinter import *
 from configparser import ConfigParser
 import requests
 
-def print_msg() -> None:
-    label.config(text="Input: " + i.get(1.0, "end-1c"))
-    label2.config(text="Input2: " + i.get(1.0, "end-1c"))
-
 def search_loc() -> None:
     """Search for the location entered by the user and output its weather info
     otherwise print an error."""
-    loc = i.get()
+    loc = i.get(1.0, "end-1c")
     w_info = get_weather_info(loc)
     # Check if there is any info for the location
     if len(w_info) > 0:
