@@ -9,6 +9,19 @@ def print_msg() -> None:
     label.config(text="Input: " + i.get(1.0, "end-1c"))
     label2.config(text="Input2: " + i.get(1.0, "end-1c"))
 
+def search_loc() -> None:
+    """Search for the location entered by the user and output its weather info
+    otherwise print an error."""
+    loc = i.get()
+    w_info = get_weather_info(loc)
+    # Check if there is any info for the location
+    if len(w_info) > 0:
+        loc_label["text"] = "{} {}".format(w_info[0], w_info[1])
+        temp_label["text"] = str(w_info[2])
+        weather_label["text"] = w_info[3]
+    else:
+        print("Cannot find location: " + loc)
+
 def create_api_file() -> None:
     """Create a file named config.ini in the current directory, and write
     the api key to it"""
@@ -32,6 +45,7 @@ def get_weather_info(location: str) -> tuple:
         w = j["weather"][0]["main"]
         return (city, country, temp, w)
     print("Unable to retrieve info for location " + location)
+    return tuple()
 
 
 window = Tk()
@@ -40,9 +54,6 @@ window.title("My Weather App")
 
 i = Text(window, height=1, width=30)
 i.pack()
-
-b = Button(window, text="Get Weather", command=print_msg)
-b.pack()
 
 label = Label(window, text="")
 label.pack()
@@ -58,6 +69,13 @@ c.read("config.ini")
 api = c[key_name]['api'] # retrieve api key
 url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
 
-get_weather_info(i.get(1.0, "end-1c"))
+b = Button(window, text="Get Weather", command=search_loc)
+b.pack()
+loc_label = Label(window, text="Location:")
+loc_label.pack()
+temp_label = Label(window, text="")
+temp_label.pack()
+weather_label = Label(window, text="")
+weather_label.pack()
 
 window.mainloop()
